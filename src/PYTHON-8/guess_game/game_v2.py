@@ -32,11 +32,12 @@ def binary_search_predict(number: int, predict: Optional[int] = None) -> int:
         int: Количество попыток, потребовавшихся для угадывания
     """
     low, high = 1, 100
-    # If predict is None or out of range, use the middle value
-    if predict is None or not (low <= predict <= high):
-        current_guess = (low + high) // 2
-    else:
-        current_guess = predict
+
+    # Если predict равен None или вне диапазона, используем среднее значение
+    if predict is None or predict < 1 or predict > 100:
+        predict = 50
+
+    current_guess = predict
     count = 1
 
     while low <= high:
@@ -90,7 +91,7 @@ def compare_algorithms() -> None:
     # Тестируем алгоритм бинарного поиска
     binary_score = score_game(binary_search_predict, fix_seed=True)
 
-    print("=" * 50)
+    print("=" * 74)
     print(f"Бинарный поиск эффективнее случайного в {random_score / binary_score:.1f} раз")
 
 
