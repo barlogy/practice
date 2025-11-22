@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import numpy as np
-from typing import Callable, Optional
+from typing import Callable, Optional, List
 
 
 def random_predict(number: int = 1, predict: Optional[int] = None) -> int:
@@ -22,7 +22,7 @@ def random_predict(number: int = 1, predict: Optional[int] = None) -> int:
     return count
 
 
-def binary_search_predict(number: int, predict: Optional[int] = 50) -> int:
+def binary_search_predict(number: int, predict: Optional[int] = None) -> int:
     """
     Угадывает число с использованием алгоритма бинарного поиска.
     Args:
@@ -32,13 +32,14 @@ def binary_search_predict(number: int, predict: Optional[int] = 50) -> int:
         int: Количество попыток, потребовавшихся для угадывания
     """
     low, high = 1, 100
-    current_guess = predict
-    count = 1 if predict is not None and 1 <= predict <= 100 else 0
+    # If predict is None or out of range, use the middle value
+    if predict is None or not (low <= predict <= high):
+        current_guess = (low + high) // 2
+    else:
+        current_guess = predict
+    count = 1
 
     while low <= high:
-        if count == 0 or current_guess != predict:
-            count += 1
-
         if current_guess == number:
             break
         elif current_guess < number:
@@ -48,6 +49,7 @@ def binary_search_predict(number: int, predict: Optional[int] = 50) -> int:
 
         # Следующая догадка по бинарному поиску
         current_guess = (low + high) // 2
+        count += 1
 
     return count
 
@@ -62,7 +64,7 @@ def score_game(predict_func: Callable[[int, Optional[int]], int],
     Returns:
         int: Среднее количество попыток
     """
-    count_ls = []
+    count_ls: List[int] = []
     if fix_seed:
         np.random.seed(1)  # фиксируем сид для воспроизводимости
 
@@ -83,15 +85,12 @@ def compare_algorithms() -> None:
     """
     Сравнивает эффективность разных алгоритмов угадывания.
     """
-    print("Сравнение алгоритмов угадывания чисел:")
-    print("=" * 79)
-
     # Тестируем случайный алгоритм
     random_score = score_game(random_predict, fix_seed=True)
     # Тестируем алгоритм бинарного поиска
     binary_score = score_game(binary_search_predict, fix_seed=True)
 
-    print("=" * 79)
+    print("=" * 50)
     print(f"Бинарный поиск эффективнее случайного в {random_score / binary_score:.1f} раз")
 
 
