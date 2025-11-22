@@ -55,8 +55,9 @@ def binary_search_predict(number: int, predict: Optional[int] = None) -> int:
     return count
 
 
-def score_game(predict_func: Callable[[int, Optional[int]], int],
-               fix_seed: bool = False) -> int:
+def score_game(
+    predict_func: Callable[[int, Optional[int]], int], fix_seed: bool = False
+) -> int:
     """
     Оценивает среднее количество попыток для угадывания числа за 1000 подходов.
     Args:
@@ -78,7 +79,9 @@ def score_game(predict_func: Callable[[int, Optional[int]], int],
         count_ls.append(predict_func(number, initial_guess))
 
     score = int(np.mean(count_ls))
-    print(f"Алгоритм '{predict_func.__name__}' угадывает число в среднем за: {score} попыток")
+    print(
+        f"Алгоритм '{predict_func.__name__}' угадывает число в среднем за: {score} попыток"
+    )
     return score
 
 
@@ -92,7 +95,9 @@ def compare_algorithms() -> None:
     binary_score = score_game(binary_search_predict, fix_seed=True)
 
     print("=" * 74)
-    print(f"Бинарный поиск эффективнее случайного в {random_score / binary_score:.1f} раз")
+    print(
+        f"Бинарный поиск эффективнее случайного в {random_score / binary_score:.1f} раз"
+    )
 
 
 if __name__ == "__main__":
