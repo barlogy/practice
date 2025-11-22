@@ -1,8 +1,8 @@
 [project]
-name = "guess-number"
+name = "sandbox-data-science"
 version = "0.1.0"
-description = "Algorithms to guess a number (1-100)"
-readme = "src/PYTHON-8/guess_game/README.md"
+description = "Data Science - Практика Skillfactory"
+readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
     "numpy>=1.21"
