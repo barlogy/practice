@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 25.11.0
+    hooks:
+      - id: black
+        name: black (python code formatter)
+        language_version: python3
+        args: ["--line-length=88"]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        name: mypy (static type checker)
+        language_version: python3
+        # optional: uncomment to enable
+        # args: ["--ignore-missing-imports"]

@@ -1,0 +1,23 @@
+[project]
+name = "guess-number"
+version = "0.1.0"
+description = "Algorithms to guess a number (1-100)"
+readme = "src/PYTHON-8/guess_game/README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.21"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0",
+    "pytest>=7.0"
+]
